@@ -11,6 +11,6 @@ app.use(express.json())
 
 app.use("/api/users", userRoutes)
 app.use("/api/ratings", ratingRoutes)
-app.use("/api/authenticate", authRoutes)
+app.use("/api/auth", authRoutes)
 
 module.exports = app
