@@ -11,7 +11,9 @@ module.exports = {
     ERROR_RATING_IS_REQUIRED: 'Avaliação é obrigatória. ',
     ERROR_INVALID_RATING: 'Avaliação inválida',
     ERROR_INVALID_LOGIN_CREDENTIALS: 'Email ou senha inválidos',
-    ERROR_NO_TOKEN: 'No token provider',
-    ERROR_INVALID_TOKEN: 'Invalid token',
+    ERROR_NO_TOKEN: 'Nenhum token informado',
+    ERROR_INVALID_TOKEN: 'Token inválido. ',
+    USER_NOT_FOUND: 'Usuário não encontrado',
+    RATING_NOT_FOUND: 'Avaliação não encontrada'
 
 }

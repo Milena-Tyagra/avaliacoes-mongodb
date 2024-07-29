@@ -21,6 +21,10 @@ module.exports = {
       const { objectId, collection } = getColectionAndId(req, collection_name);
       const user = await collection.findOne({ _id: objectId });
 
+      if(!user) {
+        return res.status(404).send(messages.USER_NOT_FOUND);
+      }
+
       return res.status(200).send(user);
     } catch (error) {
       console.error(messages.ERROR_TO_FIND_REGISTER, error);
@@ -48,6 +52,12 @@ module.exports = {
     try {
       const { objectId, collection } = getColectionAndId(req, collection_name);
       const body = req.body
+
+      const existent_user = await collection.findOne({ _id: objectId });
+
+      if(!existent_user) {
+        return res.status(404).send(messages.USER_NOT_FOUND);
+      }
       const user = await collection.updateOne(
         { _id: objectId },
         { $set: body }
@@ -61,7 +71,12 @@ module.exports = {
   },
   async deleteUser(req, res) {
     try {
-      const { objectId, collection } = getColectionAndId(req);
+      const { objectId, collection } = getColectionAndId(req, collection_name);
+      const existent_user = await collection.findOne({ _id: objectId });
+
+      if(!existent_user) {
+        return res.status(404).send(messages.USER_NOT_FOUND);
+      }
       const user = await collection.deleteOne({ _id: objectId });
 
       return res.status(200).send(user);

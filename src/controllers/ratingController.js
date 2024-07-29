@@ -21,6 +21,10 @@ module.exports = {
       const { objectId, collection } = getColectionAndId(req, collection_name)
       const rating = await collection.findOne({ _id: objectId });
 
+      if(!rating) {
+        return res.status(404).send(messages.RATING_NOT_FOUND);
+      }
+
       return res.status(200).send(rating);
     } catch (error) {
       console.error(messages.ERROR_TO_FIND_REGISTER, error);
@@ -45,6 +49,13 @@ module.exports = {
     try {
       const { objectId, collection } = getColectionAndId(req, collection_name)
       const body = req.body
+
+      const existent_rating = await collection.findOne({ _id: objectId });
+
+      if(!existent_rating) {
+        return res.status(404).send(messages.RATING_NOT_FOUND);
+      }
+
       const rating = await collection.updateOne(
         { _id: objectId },
         { $set: body }
@@ -59,6 +70,11 @@ module.exports = {
   async deleteRating(req, res) {
     try {
       const { objectId, collection } = getColectionAndId(req)
+      const existent_rating = await collection.findOne({ _id: objectId });
+
+      if(!existent_rating) {
+        return res.status(404).send(messages.RATING_NOT_FOUND);
+      }
       const rating = await collection.deleteOne(
         { _id: objectId }
       );
