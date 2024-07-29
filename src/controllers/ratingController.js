@@ -69,7 +69,7 @@ module.exports = {
   },
   async deleteRating(req, res) {
     try {
-      const { objectId, collection } = getColectionAndId(req)
+      const { objectId, collection } = getColectionAndId(req, collection_name)
       const existent_rating = await collection.findOne({ _id: objectId });
 
       if(!existent_rating) {
